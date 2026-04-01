@@ -4,10 +4,12 @@
 //
 //  Created by Prashant Pandey on 01/04/26.
 //
+import SwiftUI
 
 struct WeatherView: View {
     @State private var store = WeatherStore()
     @State private var cityName = ""
+    @FocusState private var isKeyboardActive: Bool
     
     var body: some View {
         NavigationStack {
@@ -17,8 +19,10 @@ struct WeatherView: View {
                 HStack {
                     TextField("Enter city name...", text: $cityName)
                         .textFieldStyle(.roundedBorder)
+                        .focused($isKeyboardActive)
                     
                     Button("Search") {
+                        isKeyboardActive = false
                         Task {
                             await store.fetchWeather(city: cityName)
                         }
@@ -44,6 +48,16 @@ struct WeatherView: View {
                         }
                     }
                     .padding()
+//
+//                    VStack {
+//                        ContentUnavailableView.search(text: "this city")
+//                        Button("Try Again") {
+//                            Task {
+//                                await store.fetchWeather(city: cityName)
+//                            }
+//                        }
+//                    }.padding()
+                    
                 }
                 
                 // Success State

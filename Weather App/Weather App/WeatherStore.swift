@@ -15,7 +15,7 @@ class WeatherStore {
     var isLoading = false
     var errorMessage: String?
     
-    private let apiKey = "069f4c5d350d898ac6bde479446d7e7d"
+    private let apiKey = "401313a241069d3d5e8475e8e720a409"
     
     func fetchWeather(city: String) async {
         isLoading = true
